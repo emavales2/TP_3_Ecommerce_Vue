@@ -1,6 +1,11 @@
 <template>
     <div>
         <!-- <HeroHeader/> -->
+        <BtnComponent @click="toggleContainer" :btnText="toggBtnText"/>
+        <VertTogContainer
+        v-if="showContainer"
+        :toggle="toggleContainer"
+        />
         <!-- ---------------- * * Empty container. SETS UP THE GRID * * ---------------- -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-4  border-gray-100 my-4" >
         <!-- ---------------- * * FICHE PRODUIT 1 * * ---------------- -->
@@ -16,11 +21,30 @@
 
 <script>
 import SingleProduct from '@/components/SingleProduct.vue'
+import VertTogContainer from '@/components/VertTogContainer.vue'
+import BtnComponent from '@/components/BtnComponent.vue'
 
 export default {
   components: {
-    SingleProduct
+    SingleProduct,
+    VertTogContainer,
+    BtnComponent
   },
-  props: ['inventory']
+  props: ['inventory'],
+  data () {
+    return {
+      showContainer: false
+    }
+  },
+  computed: {
+    toggBtnText () {
+      return this.showContainer ? 'FERMER' : 'AJOUTER'
+    }
+  },
+  methods: {
+    toggleContainer () {
+      this.showContainer = !this.showContainer
+    }
+  }
 }
 </script>
