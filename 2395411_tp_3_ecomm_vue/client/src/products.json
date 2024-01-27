@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "photo": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+        "name": "Produit No. UN",
+        "desc_courte": "Description courte du Produit No. 1",
+        "desc_longue": "Description longue du Produit No. 1",
+        "price": 100.00,
+        "category": "Catégorie A"
+    },
+    {
+        "id": 2,
+        "photo": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+        "name": "Produit No. DEUX",
+        "desc_courte": "Description courte du Produit No. 2",
+        "desc_longue": "Description longue du Produit No. 2",
+        "price": 102.50,
+        "category": "Catégorie B"
+    },
+    {
+        "id": 3,
+        "photo": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+        "name": "Produit No. TROIS",
+        "desc_courte": "Description courte du Produit No. 3",
+        "desc_longue": "Description longue du Produit No. 3",
+        "price": 30.00,
+        "category": "Catégorie C"
+    },
+    {
+        "id": 4,
+        "photo": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+        "name": "Test",
+        "desc_courte": "Description courte du Produit No. 4",
+        "desc_longue": "Description longue du Produit No. 4",
+        "price": 5.00,
+        "category": "Catégorie A"    
+    }
+]
