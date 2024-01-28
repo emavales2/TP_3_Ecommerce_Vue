@@ -7,7 +7,7 @@
             <p class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2">{{ product.desc_courte }}</p>
             <!-- ---------------- * * Link container * * ---------------- -->
             <div class="mb-2">
-                <a href="#" class="hover:text-blue-600 cursor-pointer hover:underline"> See more..</a>
+                <router-link :to="{ name: 'product', params: { id: product.id } }" class="hover:text-blue-600 cursor-pointer hover:underline"> See more..</router-link>
             </div>
             <!-- ---------------- * * Price * * ---------------- -->
             <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ product.price.toFixed(2) }}</span>

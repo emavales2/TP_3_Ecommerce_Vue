@@ -62,6 +62,13 @@
                 </button>
             </form>
         </div>
+        <!-- FROM MARCOS, BUT MIGHT NOT WORK ADDED TO FLOWBITE -->
+        <div>
+        <div class="text-green-600 font-semibold mb-4">Success Message</div>
+            <button class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600">
+            New Product
+            </button>
+        </div>
     </div>
 </div>
 </template>
