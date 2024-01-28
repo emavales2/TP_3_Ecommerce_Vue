@@ -23,3 +23,132 @@ OTHER
     Database
     CSS
     Upload photos
+
+
+----- VertTogContainer.vue before playing with flowbite ----
+
+<!-- THIS COMPONENT IS AN EMPTY CONTAINER THAT WILL TOGGLE OPEN/CLOSE VERTICALLY -->
+<template>
+    <aside class="overflow-hidden">
+    <!-- <aside class=" fixed overflow-hidden top-0 right-0 h-full rounded-lg"> -->
+        <div class="top-0 right-0 h-full relative bg-gray-900 text-white">
+            <div class="max-h-full p-3 overflow-auto">
+                <form>
+                    <article>
+                        <label><h4>Produit</h4></label>
+                        <input
+                            type='text'
+                            placeholder="Nom du produit"
+                            value={{product.name}}
+                        />
+                    </article>
+                    <article>
+                        <label><h4>Description</h4></label>
+                        <input
+                            type='text'
+                            placeholder="Description du produit"
+                            value={{product.desc_courte}}
+                        />
+                    </article>
+                    <article>
+                        <label><h4>Prix</h4></label>
+                        <input type='float' placeholder="Prix du produit en CAD" value={{product.price}}/>
+                    </article>
+                    <article className="deroulant">
+                        <label><h4>Catégorie</h4></label>
+                        <select value={{product.category}}>
+                            <option value="">Selectionnez une catégorie</option>
+                            <option value="Catégorie A">Catégorie A</option>
+                            <option value="Catégorie B">Catégorie B</option>
+                            <option value="Catégorie C">Catégorie C</option>
+                        </select>
+                    </article>
+
+                    <BtnComponent btnText="SAVE"/>
+                </form>
+            </div>
+        </div>
+    </aside>
+</template>
+
+<script>
+import BtnComponent from '@/components/BtnComponent.vue'
+
+export default {
+  components: {
+    BtnComponent
+  },
+  props: ['toggle']
+}
+</script>
+
+
+
+------- ProductsView.vue before i played with flowbite ------
+
+<template>
+    <div>
+        <!-- <HeroHeader/> -->
+        <BtnComponent @click="toggleContainer" :btnText="toggBtnText"/>
+        <VertTogContainer
+        v-if="showContainer"
+        :toggle="toggleContainer"
+        />
+        <!-- ---------------- * * Empty container. SETS UP THE GRID * * ---------------- -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-4  border-gray-100 my-4" >
+        <!-- ---------------- * * FICHE PRODUIT 1 * * ---------------- -->
+        <!-- v-for is the loop in vue -->
+        <div v-for="(product, i) in inventory" :key="i" :product="product">
+            <!-- AQUI VA EL SINGLE PRODUCT: Pass product data as prop to SingleProdCard component -->
+            <SingleProdCard :product="product"/>
+        </div>
+        <!-- ---------------- * * FIN Fiche Produit 1 * * ---------------- -->
+        </div>
+    </div>
+</template>
+
+<script>
+import SingleProdCard from '@/components/SingleProdCard.vue'
+import VertTogContainer from '@/components/VertTogContainer.vue'
+import BtnComponent from '@/components/BtnComponent.vue'
+
+export default {
+  components: {
+    SingleProdCard,
+    VertTogContainer,
+    BtnComponent
+  },
+  props: ['inventory'],
+  data () {
+    return {
+      showContainer: false
+    }
+  },
+  computed: {
+    toggBtnText () {
+      return this.showContainer ? 'FERMER' : 'AJOUTER'
+    }
+  },
+  methods: {
+    toggleContainer () {
+      this.showContainer = !this.showContainer
+    }
+    // addProduct (formData) {
+    //   const newProduct = {
+    //     photo: formData.photo,
+    //     name: formData.name,
+    //     desc_courte: formData.desc_courte,
+    //     desc_longue: formData.desc_longue,
+    //     price: formData.price,
+    //     category: formData.category
+    //   }
+    //   this.inventory.push(newProduct)
+    //   console.log('Nouveau produit ajouté!')
+    // },
+    // deleteProduct (name) {
+    //   this.inventory = this.inventory.filter(product => product.name !== name)
+    //   console.log('Produit éliminé :', name)
+    // }
+  }
+}
+</script>
