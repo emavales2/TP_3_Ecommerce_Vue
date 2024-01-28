@@ -1,9 +1,25 @@
 
 --- TO DO ---
 
-1) Migrate components
-    General layout pg -
-    Nav -
-    
+COMPONENTS:
+    Button
+    Single product
+    Add product form
+    Modify product form
+    Modal
+    Toggle box for add product
 
-    TEEEEST
+VIEWS
+    Home pg
+    Products pg
+    App pg  
+
+METHODS
+    Add
+    Update
+    Delete     
+
+OTHER
+    Database
+    CSS
+    Upload photos

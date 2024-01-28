@@ -45,6 +45,22 @@ export default {
     toggleContainer () {
       this.showContainer = !this.showContainer
     }
+    // addProduct (formData) {
+    //   const newProduct = {
+    //     photo: formData.photo,
+    //     name: formData.name,
+    //     desc_courte: formData.desc_courte,
+    //     desc_longue: formData.desc_longue,
+    //     price: formData.price,
+    //     category: formData.category
+    //   }
+    //   this.inventory.push(newProduct)
+    //   console.log('Nouveau produit ajouté!')
+    // },
+    // deleteProduct (name) {
+    //   this.inventory = this.inventory.filter(product => product.name !== name)
+    //   console.log('Produit éliminé :', name)
+    // }
   }
 }
 </script>

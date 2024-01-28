@@ -58,16 +58,9 @@ export default {
   },
   data () {
     return {
-      // showSideBar: false,
       // NOTE: Inventory : This is a data property that is assigned the value of product. In your previous code, import product from '@/products.json' was used to import data from a JSON file, and it seems that this imported data is assigned to the inventory property.
       inventory: product
     }
   }
-  // USE WHEN TOGGLING THE FORMULAIRE AS WELL AS THE SIDEBAR (LATER)
-  // methods: {
-  //   toggleSideBar () {
-  //     this.showSideBar = !this.showSideBar
-  //   }
-  // }
 }
 </script>
