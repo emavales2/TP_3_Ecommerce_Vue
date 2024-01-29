@@ -26,9 +26,6 @@
 // import BtnComponent from '@/components/BtnComponent.vue'
 
 export default {
-//   components: {
-//     BtnComponent
-//   },
   props: ['product']
 }
 </script>

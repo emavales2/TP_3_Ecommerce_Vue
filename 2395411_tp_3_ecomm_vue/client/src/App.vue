@@ -21,18 +21,6 @@
                     </li>
                     </ul>
                 </div>
-                <!-- ---------------- * * Will affect placement of 2 children (cart + counter) * * ---------------- -->
-                <!-- <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"> -->
-                    <!-- ---------------- * * Shopping cart button * * ---------------- -->
-                    <!-- <button type="button" class="mr-2">
-                        <span class="sr-only">Open user menu</span>
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
-                        </svg>
-                    </button> -->
-                    <!-- ---------------- * * Items in cart counter * * ---------------- -->
-                    <!-- <span class="bg-gray-800 rounded-full text-white h-7 w-7 text-center"><span class="">0</span></span>
-                </div> -->
             </div>
         </nav>
         <!-- ------------------------ * * FIN NAV BLOCK * * ------------------------ -->
@@ -47,19 +35,19 @@
 </template>
 
 <script>
-// import SideBar from './components/SideBar.vue'
+// import ProductDataService from '@/services/ProductDataService'
 import MainFooter from './components/MainFooter.vue'
-import product from '@/products.json'
+// import product from '@/products.json'
 
 export default {
   components: {
-    // SideBar,
     MainFooter
   },
   data () {
     return {
       // NOTE: Inventory : This is a data property that is assigned the value of product. In your previous code, import product from '@/products.json' was used to import data from a JSON file, and it seems that this imported data is assigned to the inventory property.
-      inventory: product
+    //   inventory: product
+      inventory: []
     }
   }
 }

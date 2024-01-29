@@ -15,49 +15,47 @@
 </template>
 
 <script>
+import ProductDataService from '@/services/ProductDataService'
 import SingleProdCard from '@/components/SingleProdCard.vue'
-// import VertTogContainer from '@/components/VertTogContainer.vue'
 import NewProdModal from '@/components/NewProdModal.vue'
 // import BtnComponent from '@/components/BtnComponent.vue'
 
 export default {
   components: {
     SingleProdCard,
-    // VertTogContainer,
     NewProdModal
     // BtnComponent
   },
-  props: ['inventory']
-//   data () {
-//     return {
-//       showContainer: false
-//     }
-//   },
-//   computed: {
-//     toggBtnText () {
-//       return this.showContainer ? 'FERMER' : 'AJOUTER'
-//     }
-//   },
-//   methods: {
-//     toggleContainer () {
-//       this.showContainer = !this.showContainer
-//     }
-//     // addProduct (formData) {
-//     //   const newProduct = {
-//     //     photo: formData.photo,
-//     //     name: formData.name,
-//     //     desc_courte: formData.desc_courte,
-//     //     desc_longue: formData.desc_longue,
-//     //     price: formData.price,
-//     //     category: formData.category
-//     //   }
-//     //   this.inventory.push(newProduct)
-//     //   console.log('Nouveau produit ajouté!')
-//     // },
-//     // deleteProduct (name) {
-//     //   this.inventory = this.inventory.filter(product => product.name !== name)
-//     //   console.log('Produit éliminé :', name)
-//     // }
-//   }
+  mounted () {
+    ProductDataService.getAll()
+      .then(response => {
+        this.inventory = response.data
+        console.log('this is a log from App.vue', response.data)
+        console.log('this is a log from INV App.vue', this.inventory)
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error)
+      })
+  },
+  methods: {
+    addInventory (product) {
+      this.inventory.push(product)
+      console.log('methods on ProductsView. Initial inventory state:', this.inventory)
+    }
+  },
+  data () {
+    console.log('data on ProductsView. Initial inventory state:', this.inventory)
+    return {
+      inventory: []
+    }
+  },
+  watch: {
+    inventory: {
+      handler (newInventory, oldInventory) {
+        console.log('Inventory updated:', newInventory)
+      },
+      deep: true // If inventory is an array or object
+    }
+  }
 }
 </script>
