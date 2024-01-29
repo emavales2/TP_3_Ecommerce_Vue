@@ -2,8 +2,8 @@
     <div>
         <!-- <HeroHeader/> -->
         <!-- ---------------- * * Empty container. SETS UP THE GRID * * ---------------- -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-4  border-gray-100 my-4" >
-            <h1>WELCOME</h1>
+        <div class="flex flex-col border-orange-300 my-4" >
+            <h1 class="text-5xl m-20 self-center" text-center>WELCOME</h1>
         </div>
     </div>
 </template>

@@ -4,13 +4,13 @@
         <div class="container px-4 px-lg-5 my-5">
           <div class="flex flex-col lg:flex-row items-center lg:items-start">
             <div class="lg:w-1/2 mb-5 lg:mb-0 p-6">
-              <img class="w-full mb-5 lg:mb-0" :src="product.photo" :alt="product.name" />
+              <img v-if="product && product.photo" class="w-full mb-5 lg:mb-0" :src="product.photo" :alt="product.name" />
             </div>
             <div class="lg:w-1/2 p-6">
               <div class="small mb-1">Prod No: {{ product.id }}</div>
               <h1 class="text-3xl lg:text-5xl font-bold mb-3">{{ product.name }}</h1>
               <div class="text-lg mb-5">
-                <span>{{ product.price.toFixed(2) }}</span>
+                <span>{{ product?.price?.toFixed(2) }}</span>
               </div>
               <p class="text-lg leading-relaxed mb-5">
                 {{ product.desc_longue }}
@@ -38,12 +38,13 @@ export default {
   props: ['inventory'],
   computed: {
     product () {
-      const product = this.inventory.find((p) => {
-        return p.id === Number(this.$route.params.id)
-      })
-      console.log(product)
+      const productId = Number(this.$route.params.id)
+      console.log('Inventory:', this.inventory)
+      const product = this.inventory.find(p => p.id === productId)
+      console.log('Product:', product)
       return product
     },
+
     productIndex () {
       const index = this.inventory.findIndex((p) => {
         return p.id === Number(this.$route.params.id)

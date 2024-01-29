@@ -1,8 +1,8 @@
 <!-- THIS MODAL CAME FROM FLOWBITE. INCORPORATING BtnComponent WAS A PAIN SO I ENDED UP USING AS IS, WITH CSS CHANGES -->
 <template>
 <!-- Modal toggle -->
-<button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="w-max self-center block border-4 border-black text-black bg-transparent hover:bg-black hover:text-white hover:border-black font-medium  text-sm px-5 py-2.5 text-center" type="button">
-  AJOUTER PRODUIT
+<button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="w-max self-center block border-4 border-white text-white bg-transparent hover:bg-orange-300 hover:text-black hover:border-black font-medium  text-sm px-5 py-2.5 text-center" type="button">
+  MODIFIER
 </button>
 <!-- <BtnComponent btnText="AJOUTER" @perform-action="toggleModal"/> -->
 <!-- Main modal -->
@@ -18,7 +18,7 @@
                 </div>
                 <!-- FIN Marcos -->
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Ajouter Nouveau Produit
+                    Modifier Produit
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -87,20 +87,14 @@
 import ProductDataService from '@/services/ProductDataService'
 
 export default {
-  props: ['addInv'],
+  props: ['inventory', 'updateInv', 'removeInv', 'remove'],
   data () {
     return {
       isModalVisible: false,
       message: null,
       submitted: false,
-      product: {
-        name: '',
-        photo: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg',
-        price: '',
-        desc_courte: '',
-        desc_longue: '',
-        category: ''
-      }
+      product: {},
+      id: parseInt(this.$route.params.id)
     }
   },
   methods: {
@@ -108,39 +102,42 @@ export default {
       this.isModalVisible = !this.isModalVisible
     },
 
-    saveProduct () {
-      const formData = new FormData()
-      formData.append('name', this.product.name)
-      formData.append('price', this.product.price)
-      formData.append('desc_courte', this.product.desc_courte)
-      formData.append('desc_longue', this.product.desc_longue)
-      formData.append('category', this.product.category)
-      formData.append('photo', this.product.photo)
-
-      // ProductDataService.create(this.product)
-      ProductDataService.create(formData)
-        .then((response) => {
-        //   console.log('inside saveProduct method', response.data)
-          this.product.id = response.data.id
-          this.addInv(this.product)
-          this.message = null
+    updateProduct () {
+      ProductDataService.update(this.id, this.product)
+        .then(response => {
+          this.updateInv(this.productIndex, this.product)
           this.submitted = true
-          // this.$router.push({ name: 'home' })
+          this.message = null
         })
         .catch((e) => {
-          //  console.log(e)
           this.message = e.response.data.message
         })
     },
-    newProduct () {
-      this.submitted = false
-      this.product = {}
-    },
-    handleImageUpload (event) {
-      //   const file = event.target.files[0]
-      //   this.uploadImage(file)
-      this.product.photo = event.target.files[0]
+    deleteProduct () {
+      ProductDataService.delete(this.id)
+        .then(response => {
+          this.removeInv(this.productIndex)
+          this.remove(this.product.name)
+          this.$router.push({ name: 'home' })
+        })
+        .catch((e) => {
+          this.message = e.response.data.message
+        })
     }
+  },
+  computed: {
+    productIndex () {
+      const index = this.inventory.findIndex((p) => {
+        return p.id === this.id
+      })
+      return index
+    }
+  },
+  mounted () {
+    ProductDataService.get(this.id)
+      .then(response => {
+        this.product = response.data
+      })
   }
 }
 </script>

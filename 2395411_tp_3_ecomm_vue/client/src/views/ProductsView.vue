@@ -48,14 +48,6 @@ export default {
     return {
       inventory: []
     }
-  },
-  watch: {
-    inventory: {
-      handler (newInventory, oldInventory) {
-        console.log('Inventory updated:', newInventory)
-      },
-      deep: true // If inventory is an array or object
-    }
   }
 }
 </script>

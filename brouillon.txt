@@ -152,3 +152,82 @@ export default {
   }
 }
 </script>
+
+
+
+--- NewProdModal.vue script before i tried to fix image loaging ------
+
+<script>
+import ProductDataService from '@/services/ProductDataService'
+
+export default {
+  props: ['addInv'],
+  data () {
+    return {
+      isModalVisible: false,
+      message: null,
+      submitted: false,
+      product: {
+        name: '',
+        photo: '',
+        price: '',
+        desc_courte: '',
+        desc_longue: '',
+        category: ''
+      }
+    }
+  },
+  methods: {
+    toggleModal () {
+      this.isModalVisible = !this.isModalVisible
+    },
+
+    saveProduct () {
+      ProductDataService.create(this.product)
+        .then((response) => {
+        //   console.log('inside saveProduct method', response.data)
+          this.product.id = response.data.id
+          this.addInv(this.product)
+          this.message = null
+          this.submitted = true
+          // this.$router.push({ name: 'home' })
+        })
+        .catch((e) => {
+          //  console.log(e)
+          this.message = e.response.data.message
+        })
+    },
+    newProduct () {
+      this.submitted = false
+      this.product = {}
+    },
+    handleImageUpload (event) {
+      const file = event.target.files[0]
+      this.uploadImage(file)
+    }
+  }
+}
+</script>
+
+--- SingleProdView.vue script before i tried to fix ----
+
+<script>
+export default {
+  props: ['inventory'],
+  computed: {
+    product () {
+      const product = this.inventory.find((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      console.log(product)
+      return product
+    },
+    productIndex () {
+      const index = this.inventory.findIndex((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      return index
+    }
+  }
+}
+</script>
